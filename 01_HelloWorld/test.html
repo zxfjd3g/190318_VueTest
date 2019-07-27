@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+</head>
+<body>
+
+<!--
+  1. 引入Vue.js
+  2. 创建Vue对象
+    el : 指定根element(选择器)
+    data : 初始化数据(页面可以访问)
+  3. 双向数据绑定 : v-model
+  4. 显示数据 : {{xxx}}   大括号表达式
+  5. 理解vue的mvvm实现
+-->
+
+  <!-- 
+    模板: html + js
+        指令: 指令属性的属性值是一个js表达式 v-model="msg"
+        插值: 在标签体文本中使用{{}}包含一个表达式, 自动显示对应的值
+  -->
+  <div id="test">
+    <input type="text" v-model="msg">
+    <p>Hello {{msg}}</p>
+  </div>
+  
+  <p>{{msg}}</p>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const vue = new Vue({ // 配置对象
+      el: '#test', // element, 它的值为选择器, 用来找到某个标签, 指定模板的区域
+      data: {// 为模板提供数据
+        msg: 'atguigu'
+      }
+    })
+
+    setTimeout(() => {
+      vue.msg = 'feifei'
+    }, 1000);
+  </script>
+</body>
+</html>
