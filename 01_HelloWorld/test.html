@@ -30,7 +30,7 @@
 
   <script src="../js/vue.js"></script>
   <script>
-    const vue = new Vue({ // 配置对象
+    const vm = new Vue({ // 配置对象
       el: '#test', // element, 它的值为选择器, 用来找到某个标签, 指定模板的区域
       data: {// 为模板提供数据
         msg: 'atguigu'
@@ -38,8 +38,8 @@
     })
 
     setTimeout(() => {
-      vue.msg = 'feifei'
-    }, 1000);
+      vm.msg = 'feifei'
+    }, 1000)
   </script>
 </body>
 </html>
