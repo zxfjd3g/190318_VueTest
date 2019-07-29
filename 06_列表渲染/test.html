@@ -17,14 +17,66 @@
 
 <div id="demo">
   <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <li v-for="(person, index) in persons" :key="person.id">
+      {{index}}---{{person.id}}---{{person.name}}---{{person.age}}
+      ---<button @click="deleteP(index)">删除</button>
+      ---<button @click="updateP(index, {id: Date.now(), name: 'xiaomin', age: 18})">更新</button>
+    </li>
+  </ul>
 
   <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="(value, key) in persons[1]" :key="key">
+      {{key}}: {{value}}
+    </li>
+  </ul>
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  /* 
+    data对象中: 
+    所有层次的对象属性都有对应的set监视(数组除外)
+    如果data中的属性值是数组:
+      重写数组更新的方法:
+          调用原本的方法来更新数组
+          更新界面
+      要求: 我们要想通过更新数组来更新界面: 调用数组更新的方法, 而不能直接通过下标来更新
+   */
+  new Vue({
+    el: '#demo',
+    data: {
+      persons: [
+        {id: 1, name: 'Tom', age: 15},
+        {id: 2, name: 'Jack', age: 13},
+        {id: 4, name: 'Bob', age: 16},
+        {id: 5, name: 'Jerry', age: 12},
+        {id: 7, name: 'Cat', age: 11},
+      ],
+      a: {
+        b: 2
+      }
+    },
+    methods: {
+      deleteP (index) {
+        // 删除persons中指定index的person
+        this.persons.splice(index, 1)
+      },
 
+      updateP (index, newP) {
+        // this.persons = []
+        /// this.persons[index] = newP  // 没有set监视
+        this.persons.splice(index, 1, newP) // 调用是数组重写后的方法
+       
+        /* const p = this.persons[index]    // 对象中的属性都有set监视
+        p.id = newP.id
+        p.name = newP.name
+        p.age = newP.age */
+      }
+    }
+  })
 </script>
 </body>
 </html>
