@@ -26,30 +26,65 @@
 <div id="demo">
   <button @click="destroyVM">destroy vm</button>
   <p v-show="isShow">hello world!</p>
-
+  <p>{{msg}}</p>
+  <p>{{msg}}</p>
+  <p>{{msg}}</p>
+  <p>{{msg}}</p>
+  <p>{{msg}}</p>
+  <p>{{msg}}</p>
 </div>
+<p>{{isShow}}</p>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
   new Vue({
     el: '#demo',
     data: {
-      isShow: true
+      isShow: true,
+      msg: 'abc'
+    },
+
+
+    beforeCreate() {
+      console.log('beforeCreate()')
+    },
+
+    created() {
+      console.log('created()')
+    },
+
+    beforeMount() {
+      console.log('beforeMount()')
     },
 
     // 在初始显示之后立即执行一次
     // 一般执行异步操作: 启动定时器, 发ajax请求
     mounted() {
+      console.log('mounted()')
       this.intervalId = setInterval(() => {
         console.log('-----')
         this.isShow = !this.isShow
       }, 1000);
     },
 
+    beforeUpdate() {
+      console.log('beforeUpdate()')
+    },
+
+    updated() {
+      console.log('updated()')
+    },
+
+
     // 在vm死亡之前执行一次
     // 做收尾工作: 清除定时器
     beforeDestroy() {
+      console.log('beforeDestroy()')
       clearInterval(this.intervalId)
+    },
+
+    destroyed() {
+      console.log('destroyed()')
     },
 
 

@@ -66,6 +66,8 @@
       },
 
       updateP (index, newP) {
+        console.log(this.persons)
+        console.log([])
         // this.persons = []
         /// this.persons[index] = newP  // 没有set监视
         this.persons.splice(index, 1, newP) // 调用是数组重写后的方法
